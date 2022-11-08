@@ -92,6 +92,16 @@ const App = () => {
       if (granted) {
       } else {
         console.log('Check permissions');
+
+        PermissionsAndroid.requestMultiple([
+          PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION,
+          PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+          PermissionsAndroid.PERMISSIONS.FOREGROUND_SERVICE,
+          PermissionsAndroid.PERMISSIONS.BLUETOOTH_ADVERTISE,
+          PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
+          ]).then(granted2 => {
+            console.log(granted2)
+        })
       }
     });
 
