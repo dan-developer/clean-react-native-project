@@ -79,7 +79,7 @@ const App = () => {
   }
 
   useEffect(() => {
-    BleManager.start({ showAlert: false , forceLegacy: true})
+    BleManager.start({ showAlert: false })
 
     //active the bluethoot if its off
     getState();
