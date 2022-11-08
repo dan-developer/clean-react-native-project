@@ -152,7 +152,12 @@ const App = () => {
   // if the device exist dont scan anything go directly to connect this device
   const startScan = () => {
     if (!isScanning) {
-      BleManager.scan([UART_SERVICE_UUID], 30, false)
+      BleManager.scan([UART_SERVICE_UUID], 30, false, {
+        numberOfMatches: 3,
+        matchMode: 1,
+        scanMode: 2,
+        reportDelay: 0
+      })
           .then(results => {
             console.log('Scanning...');
             setIsScanning(true);
