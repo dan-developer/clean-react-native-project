@@ -84,6 +84,7 @@ const App = () => {
 
     PermissionsAndroid.check(
         PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+        PermissionsAndroid.PERMISSIONS.BLUETOOTH_SCAN,
     ).then(granted => {
       if (granted) {
       } else {
@@ -91,6 +92,7 @@ const App = () => {
 
         PermissionsAndroid.requestMultiple([
           PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+          PermissionsAndroid.PERMISSIONS.BLUETOOTH_SCAN,
           ]).then(granted2 => {
             console.log(granted2)
         })
