@@ -178,13 +178,12 @@ const App = () => {
 
   function upgradeFirmware(item) {
     console.log('Downloading firmware...')
-    this.setState({ upgrading: true })
     RNFetchBlob
       .config({
         fileCache: true,
         appendExt: 'zip'
       })
-      .fetch('GET', 'https://tmpfiles.org/dl/221689/tll-v1.0.4.zip', {
+      .fetch('GET', 'https://tmpfiles.org/dl/225566/pls-v1.0.4.zip', {
         // Authorization : 'Bearer access-token...',
         // more headers  ..
       })
