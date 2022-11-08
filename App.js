@@ -161,7 +161,7 @@ const App = () => {
   // if the device exist dont scan anything go directly to connect this device
   const startScan = () => {
     if (!isScanning) {
-      BleManager.scan([], 3, true)
+      BleManager.scan([], 30, false)
           .then(results => {
             console.log('Scanning...');
             setIsScanning(true);
