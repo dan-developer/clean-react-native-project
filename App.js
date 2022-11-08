@@ -85,7 +85,7 @@ const App = () => {
     getState();
 
     if (Platform.OS === 'android' && Platform.Version >= 23) {
-      PermissionsAndroid.requestMultiple(PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION, PermissionsAndroid.PERMISSIONS.BLUETOOTH_SCAN).then((result) => {
+      PermissionsAndroid.requestMultiple([PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION, PermissionsAndroid.PERMISSIONS.BLUETOOTH_SCAN]).then((result) => {
         console.log(result)
       })
     }
