@@ -16,7 +16,7 @@ import {
   Text,
   View,
   PermissionsAndroid,
-  Alert, TouchableOpacity, FlatList,
+  Alert, TouchableOpacity, FlatList, Platform,
 } from "react-native";
 import BleManager from 'react-native-ble-manager';
 
@@ -79,31 +79,26 @@ const App = () => {
   }
 
   useEffect(() => {
-    BleManager.start({showAlert: false});
+    BleManager.start({ showAlert: false , forceLegacy: true})
 
     //active the bluethoot if its off
     getState();
 
-    PermissionsAndroid.check(
-        PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION,
-        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-        PermissionsAndroid.PERMISSIONS.BLUETOOTH_SCAN,
-        PermissionsAndroid.PERMISSIONS.BLUETOOTH_CONNECT,
-    ).then(granted => {
-      if (granted) {
-      } else {
-        console.log('Check permissions');
-
-        PermissionsAndroid.requestMultiple([
-          PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION,
-          PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-          PermissionsAndroid.PERMISSIONS.BLUETOOTH_SCAN,
-          PermissionsAndroid.PERMISSIONS.BLUETOOTH_CONNECT,
-          ]).then(granted2 => {
-            console.log(granted2)
-        })
-      }
-    });
+    if (Platform.OS === 'android' && Platform.Version >= 23) {
+      PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION).then((result) => {
+        if (result) {
+          console.log('Permission is OK')
+        } else {
+          PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION).then((result) => {
+            if (result) {
+              console.log('User accept')
+            } else {
+              console.log('User refuse')
+            }
+          })
+        }
+      })
+    }
 
     /*Add all the listener to the module  */
     bleManagerEmitter.addListener(
