@@ -29,6 +29,8 @@ import RNFetchBlob from "rn-fetch-blob";
 const BleManagerModule = NativeModules.BleManager;
 const bleManagerEmitter = new NativeEventEmitter(BleManagerModule);
 
+const UART_SERVICE_UUID = '6E400001-B5A3-F393-E0A9-E50E24DCCA9E'
+
 const App = () => {
   const [isScanning, setIsScanning] = useState(false);
   const peripherals = new Map();
@@ -161,7 +163,7 @@ const App = () => {
   // if the device exist dont scan anything go directly to connect this device
   const startScan = () => {
     if (!isScanning) {
-      BleManager.scan([], 30, false)
+      BleManager.scan([UART_SERVICE_UUID], 30, false)
           .then(results => {
             console.log('Scanning...');
             setIsScanning(true);
