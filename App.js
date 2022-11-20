@@ -183,7 +183,7 @@ const App = () => {
         fileCache: true,
         appendExt: 'zip'
       })
-      .fetch('GET', 'https://tmpfiles.org/dl/225566/pls-v1.0.4.zip', {
+      .fetch('GET', 'https://tmpfiles.org/dl/291999/pls-v1.0.4.zip', {
         // Authorization : 'Bearer access-token...',
         // more headers  ..
       })
